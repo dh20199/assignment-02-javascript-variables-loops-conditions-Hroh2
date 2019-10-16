@@ -1,8 +1,6 @@
 // in this exercise we explore objects (briefly), as well as
 // conditionals (if & switch) and looping (while & for)
 
-
-
 // Problem 1
 // Write a function that returns  simple "Object Literal" when passed
 // a set of 3 values
@@ -26,9 +24,12 @@ function returnObject (first, last, prof) {
   // o.firstName = first
   // etc.
   // don't forget to return the object
+  let o = {};
+  o.firstName = first;
+  o.lastName = last;
+  o.profession = prof;
+  return o;
 }
-
-
 
 // Problem 2
 // Write a function that takes an "object literal" with the properties
@@ -62,9 +63,12 @@ function objectToSentence (obj) {
   // obj.propertyname
   // note the quotes in the first options
   // also note: you need to change this next line!!
-  return 'RETURNVALUE';
+  let person = obj.firstName + ' ' + obj.lastName + ' was a ' + obj.profession + '.';
+  return person;
 }
+console.log (objectToSentence)
 
+//obj = {firstName: 'Frantz', lastName : 'Fanon', profession: 'psychiatrist'};
 
 // Problem 3
 // Write a function that takes an object as a parameter. If the object
@@ -98,6 +102,11 @@ function wasWriter (obj) {
   // "return" statement inside the conditional braces
   // so you can, e.g.,
   // if (...) {return A} else {return B}
+  if (obj.profession === 'novelist') {
+    return  obj.firstName + ' ' + obj.lastName + ' was a writer.'; //'${obj.firstName} ${obj.lastName} was a writer.';
+  }else {
+    return obj.firstName + ' ' + obj.lastName + ' was not a writer.';//'${obj.firstName} ${obj.lastName} was not a writer.';
+  }
 }
 
 
@@ -118,7 +127,15 @@ function wasWriter (obj) {
 function stringIterator (aString, aNumber) {
   // remember a basic "for" loop has this structure:
   // for (var i = 0; i< SOMETHING; i++) {...statements...  };
-}
+  let stringOne = '';
+  for (let i = 0; i < aNumber; i++){
+    stringOne = stringOne + aString;
+  }
+return stringOne;}
+
+    //aString += aString; //aString.concat(aString);
+  //return aString;
+  
 
 
 // Problem 5
@@ -141,11 +158,15 @@ function stringIterator (aString, aNumber) {
  * @param {number} aNumber
  * @returns   {string}
  */
-function prettyIterator (aString, aNumber) {
-  // be sure to check your results on this one; it has a trick. maybe 2. 
+function prettyIterator (aString, aNumber)  {
+  let iteration = '';
+  let pretty = 0;
+  for (let i = 0; i < aNumber; i++) {
+    pretty = pretty + 1;
+    iteration = iteration + aString + '(' + pretty + ')' + '\n';
+  }
+  return iteration;
 }
-
-
 
 // Problem 6
 // Write a function that, when passed an object 
@@ -191,9 +212,8 @@ function computeReign (pm) {
   // attributes and variables. remember that you may need to
   // "escape" the ' with \'
   // finally, makre sure you return the sentence as the value of the function
+  return pm['fullName'] + "'s reign was " + (pm.to - pm.from) +" years long.";
 }
-
-
 
 // Problem 7
 // Write a function that takes as a parameter an ARRAY OF OBJECTS
@@ -243,7 +263,14 @@ function sentences(list) {
   // Hint: "ministers" is an ARRAY of OBJECTS. The simplest way to solve this problem
   // is to use the "for...of" loop syntax to loop through the array,
   // and the object[attribute] or object.attribute reference format to access
-  // the internal components of the objects.
+  // the internal components of the objects
+  let final = '';
+  for (let minister of list) {
+  //(for let i = 0; i< list.length; i++) {
+    //let minister = list[i];
+    final = final + minister.fullName + "'s reign was " + (minister.to - minister.from) + " years long.\n";
+  }
+  return final;
 }
 
 // DO NOT MODIFY -- FOR AUTOMATED TESTING ONLY
@@ -253,7 +280,6 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 else {
   var exports = window.skeleton = {};
 }
-
 
 exports.returnObject = returnObject;
 exports.objectToSentence = objectToSentence;
